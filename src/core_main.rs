@@ -36,13 +36,13 @@ pub fn core_main() -> Option<Vec<String>> {
 // 1. ID Server（rendezvous server，通常是 hbbs:21115）
 crate::ui_interface::set_option(
     "custom-rendezvous-server".into(),
-    "rustdesk.hbitgs.com:21115".to_owned(),
+    "rustdesk.hbitgs.com".to_owned(),
 );
 
 // 2. Relay Server（中继服务器，通常是 sfu / relay:21117）
 crate::ui_interface::set_option(
     "relay-server".into(),
-    "rustdesk.hbitgs.com:21117".to_owned(),
+    "rustdesk.hbitgs.com".to_owned(),
 );
 
 // 3. AES 加密通信密钥（必须与你的 hbbs / hbbr 使用的密钥一致）
