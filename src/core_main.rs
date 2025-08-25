@@ -29,6 +29,39 @@ macro_rules! my_println{
 /// If it returns [`Some`], then the process will continue, and flutter gui will be started.
 #[cfg(not(any(target_os = "android", target_os = "ios")))]
 pub fn core_main() -> Option<Vec<String>> {
+    // =============================
+// 🚀 硬编码我的自建 RustDesk 服务器信息（默认连接配置）
+// =============================
+
+// 1. ID Server（rendezvous server，通常是 hbbs:21115）
+crate::ui_interface::set_option(
+    "custom-rendezvous-server".into(),
+    "rustdesk.hbitgs.com:21115".to_owned(),
+);
+
+// 2. Relay Server（中继服务器，通常是 sfu / relay:21117）
+crate::ui_interface::set_option(
+    "relay-server".into(),
+    "rustdesk.hbitgs.com:21117".to_owned(),
+);
+
+// 3. AES 加密通信密钥（必须与你的 hbbs / hbbr 使用的密钥一致）
+crate::ui_interface::set_option(
+    "key".into(),
+    "aMe9BcmlfdRgQVkOyqWLNOklOIcFPOTmkv9FJa3t8UQ=".to_owned(),
+);
+
+// 4. （可选但推荐）固定密码，用于直接连接（免输入密码）
+// 注意：RustDesk 是否支持直接以代码设置固定密码取决于版本
+// 如果 ui_interface 支持 "password" 选项，则如下设置：
+crate::ui_interface::set_option(
+    "password".into(),
+    "Sddl123456".to_owned(),
+);
+
+// 如果你的版本没有 "password" 选项，也可以尝试以下之一（视版本而定）：
+// - "predefined-password"
+// - 或需要在连接管理逻辑中硬编码（后续可再帮你分析）
     crate::load_custom_client();
     #[cfg(windows)]
     if !crate::platform::windows::bootstrap() {
